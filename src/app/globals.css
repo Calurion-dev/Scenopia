@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f2f3ef;
+  --color-paper2: #e8eae4;
+  --color-ink: #141719;
+  --color-graphite: #202527;
+  --color-graphite2: #2b3133;
+  --color-muted: #6b726e;
+  --color-line: #d3d7cf;
+  --color-orange: #f05a28;
+  --color-amber: #e8a33d;
+  --color-cyan: #5fb3c9;
+  --color-monitor: #0a0c0d;
+  --color-monitor2: #111617;
+  --color-monitorline: #2a3234;
+  --color-rec: #ff3b30;
+  --color-success: #4e7a5a;
+  --color-danger: #b3402f;
+
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-orange);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+input[type="range"] {
+  accent-color: var(--color-orange);
+}
+
+/* --- Matières --- */
+
+.paper-grid {
+  background-image:
+    linear-gradient(to right, rgba(20, 23, 25, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 23, 25, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.blueprint-grid {
+  background-color: #0d171b;
+  background-image:
+    linear-gradient(to right, rgba(95, 179, 201, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(95, 179, 201, 0.1) 1px, transparent 1px),
+    linear-gradient(to right, rgba(95, 179, 201, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(95, 179, 201, 0.035) 1px, transparent 1px);
+  background-size:
+    80px 80px,
+    80px 80px,
+    16px 16px,
+    16px 16px;
+}
+
+.monitor-grid {
+  background-color: var(--color-monitor);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.tape {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid currentColor;
+  padding: 0.2rem 0.45rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.slate-number {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.rule-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.rule-label::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--color-line);
+}
+
+/* --- Mouvement --- */
+
+@keyframes rec-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
+.rec-dot {
+  animation: rec-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 240ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Impression --- */
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-block {
+    break-inside: avoid;
+  }
+
+  .print-page {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
