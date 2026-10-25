@@ -51,10 +51,12 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Dark Reader et d'autres extensions injectent des attributs sur <html>.
   return (
     <html
       lang="fr"
       className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
     >
       <body>
         <StoreProvider>{children}</StoreProvider>
